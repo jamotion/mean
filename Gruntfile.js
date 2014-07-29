@@ -32,6 +32,15 @@ module.exports = function(grunt) {
           interval: 500
         }
       },
+      less: {
+          production: {
+              options: {
+              },
+              files: {
+                  'temp/app.css': 'app.less'
+              }
+          }
+      },
       css: {
         files: paths.css,
         tasks: ['csslint'],
