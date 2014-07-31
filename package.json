@@ -3,27 +3,30 @@
   "description": "MEAN.io: A fullstack JavaScript framework powered by MongoDB, ExpressJS, AngularJS, NodeJS.",
   "version": "4.0.2",
   "private": false,
-  "author": "Linnovate <mean@linnovate.net>",
+  "author": {
+    "name": "Linnovate",
+    "email": "mean@linnovate.net"
+  },
   "contributors": [
     {
       "name": "Lior Kesos",
-      "mail": "lior@linnovate.net"
+      "email": "lior@linnovate.net"
     },
     {
       "name": "Yonatan Ellman",
-      "mail": "yonatan@linnovate.net"
+      "email": "yonatan@linnovate.net"
     },
     {
       "name": "Drew Fyock",
-      "mail": "drew@steelbisondev.com"
+      "email": "drew@steelbisondev.com"
     },
     {
       "name": "Ehud Shahak",
-      "mail": "ehud@linnovate.net"
+      "email": "ehud@linnovate.net"
     },
     {
       "name": "Amos Haviv",
-      "mail": "mail@amoshaviv.com"
+      "email": "mail@amoshaviv.com"
     }
   ],
   "mean": "0.4.0",
@@ -68,7 +71,7 @@
     "grunt-nodemon": "0.2.1",
     "load-grunt-tasks": "^0.4.0",
     "lodash": "^2.4.1",
-    "meanio": "jamotion/mean-cli",
+    "meanio": "git://github.com/jamotion/mean-cli",
     "method-override": "^1.0.0",
     "mongoose": "^3.8.8",
     "morgan": "^1.0.0",
@@ -104,5 +107,16 @@
     "requirejs": "^2.1.11",
     "should": "3.3.1",
     "supertest": "0.11.0"
-  }
+  },
+  "readme": "# [![MEAN Logo](http://www.mean.io/img/logos/meanlogo.png)](http://mean.io/) MEAN Stack\n\n[![Build Status](https://travis-ci.org/linnovate/mean.png?branch=master)](https://travis-ci.org/linnovate/mean)\n[![Dependencies Status](https://david-dm.org/linnovate/mean.png)](https://david-dm.org/linnovate/mean)\n\nMEAN is a boilerplate that provides a nice starting point for [MongoDB](http://www.mongodb.org/), [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), and [AngularJS](http://angularjs.org/) based applications. It is designed to give you a quick and organized way to start developing MEAN based web apps with useful modules like Mongoose and Passport pre-bundled and configured. We mainly try to take care of the connection points between existing popular frameworks and solve common integration problems.\n\n## Prerequisites\n* Node.js - Download and Install [Node.js](http://www.nodejs.org/download/). You can also follow [this gist](https://gist.github.com/isaacs/579814) for a quick and easy way to install Node.js and npm\n* MongoDB - Download and Install [MongoDB](http://docs.mongodb.org/manual/installation/) - Make sure `mongod` is running on the default port (27017).\n\n### Tools Prerequisites\n* NPM - Node.js package manage; should be installed when you install node.js.\n* Bower - Web package manager. Installing [Bower](http://bower.io/) is simple when you have `npm`:\n\n```\n$ npm install -g bower\n```\n\n### Optional [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)\n* Grunt - Download and Install [Grunt](http://gruntjs.com).\n```\n$ npm install -g grunt-cli\n```\n\n## Additional Packages\n* Express - Defined as npm module in the [package.json](package.json) file.\n* Mongoose - Defined as npm module in the [package.json](package.json) file.\n* Passport - Defined as npm module in the [package.json](package.json) file.\n* AngularJS - Defined as bower module in the [bower.json](bower.json) file.\n* Twitter Bootstrap - Defined as bower module in the [bower.json](bower.json) file.\n* UI Bootstrap - Defined as bower module in the [bower.json](bower.json) file.\n\n## Quick Install\n  The quickest way to get started with MEAN is to install the `meanio` package from NPM.\n\n  Install MEAN CLI:\n\n    $ [sudo] npm install -g meanio@latest\n    $ mean init <myApp>\n    $ cd <myApp> && npm install\n\n  We recommend using [Grunt](https://github.com/gruntjs/grunt-cli) to start the server:\n\n    $ grunt\n\n  If grunt aborts because of JSHINT errors, these can be overridden with the `force` flag:\n\n    $ grunt -f\n\n  Alternatively, when not using `grunt` you can run:\n\n    $ node server\n\n  Then, open a browser and go to:\n\n    http://localhost:3000\n\n\n## Troubleshooting\nDuring install some of you may encounter some issues.\n\nMost issues can be solved by one of the following tips, but if are unable to find a solution feel free to contact us via the repository issue tracker or the links provided below.\n\n#### Update NPM, Bower or Grunt\nSometimes you may find there is a weird error during install like npm's *Error: ENOENT*. Usually updating those tools to the latest version solves the issue.\n\n* Updating NPM:\n```\n$ npm update -g npm\n```\n\n* Updating Grunt:\n```\n$ npm update -g grunt-cli\n```\n\n* Updating Bower:\n```\n$ npm update -g bower\n```\n\n#### Cleaning NPM and Bower cache\nNPM and Bower has a caching system for holding packages that you already installed.\nWe found that often cleaning the cache solves some troubles this system creates.\n\n* NPM Clean Cache:\n```\n$ npm cache clean\n```\n\n* Bower Clean Cache:\n```\n$ bower cache clean\n```\n\n#### Installation problems on Windows 8 / 8.1\nSome of Mean.io dependencies uses [node-gyp](https://github.com/TooTallNate/node-gyp) with supported Python version 2.7.x. So if you see an error related to node-gyp rebuild follow next steps:\n\n1. install [Python 2.7.x](https://www.python.org/downloads/)\n2. install [Microsoft Visual Studio C++ 2012 Express](http://www.microsoft.com/ru-ru/download/details.aspx?id=34673)\n3. fire NPM update\n````\n$ npm update -g\n````\n\n## Configuration\nAll configuration is specified in the [config](/config/) folder, through the [env](config/env/) files, and is orchestrated through the [meanio](https://github.com/linnovate/mean-cli) NPM module. Here you will need to specify your application name, database name, and hook up any social app keys if you want integration with Twitter, Facebook, GitHub, or Google.\n\n### Environmental Settings\n\nThere are three environments provided by default: __development__, __test__, and __production__.\n\nEach of these environments has the following configuration options:\n\n * __db__ - This is the name of the MongoDB database to use, and is set by default to __mean-dev__ for the development environment.\n* __app.name__ - This is the name of your app or website, and can be different for each environment. You can tell which environment you are running by looking at the TITLE attribute that your app generates.\n* __Social OAuth Keys__ - Facebook, GitHub, Google, Twitter. You can specify your own social application keys here for each platform:\n  * __clientID__\n  * __clientSecret__\n  * __callbackURL__\n* __mailer__ - This is where you enter your email service provider, username and password\n\nTo run with a different environment, just specify NODE_ENV as you call grunt:\n\n    $ NODE_ENV=test grunt\n\nIf you are using node instead of grunt, it is very similar:\n\n    $ NODE_ENV=test node server\n\nTo simply run tests\n\n    $ npm test\n\n> NOTE: Running Node.js applications in the __production__ environment enables caching, which is disabled by default in all other environments.\n\n## Maintaining your own repository\nAfter initializing a project, you'll see that the root directory of your project is already a git repository. MEAN uses git to download and update its own code. To handle its own operations, MEAN creates a remote called `upstream`. This way you can use git as you would in any other project.\n\nTo maintain your own public or private repository, add your repository as remote. See here for information on [adding an existing project to GitHub](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line).\n\n```\ngit remote add origin <remote repository URL>\ngit push -u origin master\n```\n\n\n## Getting Started\nWe pre-included an article example. Check out:\n\n  * [The Model](packages/articles/server/models/article.js) - Where we define our object schema.\n  * [The Controller](packages/articles/server/controllers/articles.js) - Where we take care of our backend logic.\n  * [NodeJS Routes](packages/articles/server/routes/articles.js) - Where we define our REST service routes.\n  * [AngularJs Routes](packages/articles/public/routes/articles.js) - Where we define our CRUD routes.\n  * [The AngularJs Service](packages/articles/public/services/articles.js) - Where we connect to our REST service.\n  * [The AngularJs Controller](packages/articles/public/controllers/articles.js) - Where we take care of  our frontend logic.\n  * [The AngularJs Views Folder](packages/articles/public/views) - Where we keep our CRUD views.\n\n## Heroku Quick Deployment\nBefore you start make sure you have the [Heroku toolbelt](https://toolbelt.heroku.com/)\ninstalled and an accessible MongoDB instance - you can try [MongoHQ](http://www.mongohq.com/)\nwhich has an easy setup).\n\nAdd the db string to the production env in server/config/env/production.js.\n\n```\ngit init\ngit add .\ngit commit -m \"initial version\"\nheroku apps:create\nheroku config:add NODE_ENV=production\nheroku config:add BUILDPACK_URL=https://github.com/mbuchetics/heroku-buildpack-nodejs-grunt.git\ngit push heroku master\nheroku config:set NODE_ENV=production\n```\n\n## More Information\n  * Visit us at [Linnovate.net](http://www.linnovate.net/).\n  * Visit our [Ninja's Zone](http://www.meanleanstartupmachine.com/) for extended support.\n\n## License\n[The MIT License](http://opensource.org/licenses/MIT)\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/jamotion/mean/issues"
+  },
+  "homepage": "https://github.com/jamotion/mean",
+  "_id": "mean@4.0.2",
+  "_shasum": "aa25b0355b9bab4148efe37e89402505486d69c2",
+  "_resolved": "git://github.com/jamotion/mean#90045fa3d410ee05ee89425bce58ef58d189f838",
+  "_from": "git://github.com/jamotion/mean",
+  "_fromGithub": true
 }
