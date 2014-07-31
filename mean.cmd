@@ -1,0 +1,1 @@
+node.exe ..\node_modules\mean\node_modules\meanio\bin\mean %*
