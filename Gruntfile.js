@@ -3,10 +3,11 @@
 var paths = {
   js: ['*.js', 'test/**/*.js', '!test/coverage/**', '!bower_components/**', 'packages/**/*.js', '!packages/**/node_modules/**'],
   html: ['packages/**/public/**/views/**', 'packages/**/server/views/**'],
-  css: ['!bower_components/**', 'packages/**/public/**/css/*.css']
+  css: ['!bower_components/**', 'packages/**/public/**/css/*.css'],
+  less: ['!bower_components/**', 'packages/**/public/**/css/*.less', 'assets/css/*.less']
 };
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
   if (process.env.NODE_ENV !== 'production') {
     require('time-grunt')(grunt);
@@ -33,13 +34,11 @@ module.exports = function(grunt) {
         }
       },
       less: {
-          production: {
-              options: {
-              },
-              files: {
-                  'temp/app.css': 'app.less'
-              }
-          }
+        files: paths.less,
+        tasks: ['less'],
+        options: {
+          livereload: true
+        }
       },
       css: {
         files: paths.css,
@@ -65,6 +64,24 @@ module.exports = function(grunt) {
         files: '<%= assets.core.js %>'
       }
     },
+    less: {
+      app: {
+        files: [
+          {
+            expand: true,
+            cwd: 'packages/',
+            src: '**/*.less',
+            dest: 'packages/',
+            ext: '.css'
+          }
+        ]
+      },
+      bootstrap: {
+        files: {
+          'assets/css/bootstrap.css': 'assets/css/bootstrap.less'
+        }
+      }
+    },
     csslint: {
       options: {
         csslintrc: '.csslintrc'
@@ -82,7 +99,7 @@ module.exports = function(grunt) {
         options: {
           args: [],
           ignore: ['node_modules/**'],
-          ext: 'js,html',
+          ext: 'js,html,less',
           nodeArgs: ['--debug'],
           delayTime: 1,
           cwd: __dirname
@@ -90,9 +107,18 @@ module.exports = function(grunt) {
       }
     },
     concurrent: {
-      tasks: ['nodemon', 'watch'],
+      tasks: ['nodemon', 'watch', 'open'],
       options: {
         logConcurrentOutput: true
+      }
+    },
+    open: {
+      main: {
+        path: 'http://localhost:3000/',
+        app: 'firefox',
+        options: {
+          delay: 3
+        }
       }
     },
     mochaTest: {
@@ -100,7 +126,7 @@ module.exports = function(grunt) {
         reporter: 'spec',
         require: [
           'server.js',
-          function() {
+          function () {
             require('meanio/lib/util').preload(__dirname + '/packages/**/server', 'model');
           }
         ]
@@ -124,9 +150,9 @@ module.exports = function(grunt) {
 
   //Default task(s).
   if (process.env.NODE_ENV === 'production') {
-    grunt.registerTask('default', ['clean', 'cssmin', 'uglify', 'concurrent']);
+    grunt.registerTask('default', ['clean', 'less', 'cssmin', 'uglify', 'concurrent']);
   } else {
-    grunt.registerTask('default', ['clean', 'jshint', 'csslint', 'concurrent']);
+    grunt.registerTask('default', ['clean', 'less', 'jshint', 'csslint', 'concurrent']);
   }
 
   //Test task.
