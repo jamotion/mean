@@ -117,7 +117,7 @@ module.exports = function (grunt) {
         path: 'http://localhost:3000/',
         app: 'firefox',
         options: {
-          delay: 3
+          delay: 5
         }
       }
     },
